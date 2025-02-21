@@ -305,7 +305,7 @@ HomeTab:CreateButton({
 })
 
 HomeTab:CreateDropdown({
-    Name = "Change Theme",
+    Name = "Custom Theme",
     Options = RayfieldThemeList,
     CurrentOption = {"Default"},
     MultipleOptions = false,
