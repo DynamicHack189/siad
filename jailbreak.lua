@@ -16,8 +16,8 @@ end
 Notify("Jailbreak Script","Starting All",3)
 local RayfieldThemeList = {"Default","Ocean","AmberGlow","Light","Amethyst","Green","Bloom","DarkBlue","Serenity"}
 local Win = Lib:CreateWindow({
-   Name = "Fisch",
-   Icon = "fish-symbol",
+   Name = "Jialbreak",
+   Icon = "banana",
    LoadingTitle = "SS. Starkield",
    LoadingSubtitle = "Starkield Series Scripts",
    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
@@ -285,8 +285,6 @@ end
 local HomeTab = Win:CreateTab("Home", "home")
 
 local ScriptsTab = Win:CreateTab("Scripts", "scroll-text")
-
---local TPTab = Win:CreateTab("TP", "telescope")
 
 local PlayerTab = Win:CreateTab("Player", "user")
 
