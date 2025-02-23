@@ -227,8 +227,8 @@ function GetRoot()
 end
 
 function FindOnDescendents(Name:String,Obj)
-    local target
-    for _,des in pairs(obj:GetDescendants) do 
+    local target = nil
+    for _,des in pairs(obj:GetDescendants()) do 
         if des.Name == Name then
             target = des
         end
