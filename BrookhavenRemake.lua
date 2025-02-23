@@ -169,7 +169,7 @@ function FireEvent(event,args)
     if event == "Car" then
         local re = ImportantEvents.SpawnCar
         local arg1 = ImportantArgs.SpawnCar
-        re:FireSever(arg1,args.arg1)
+        re:FireServer(arg1, args.arg1)
 
     elseif event == "Name" then 
         local re = ImportantEvents.NameBioTxt
@@ -179,22 +179,22 @@ function FireEvent(event,args)
     elseif event == "Bio" then 
         local re = ImportantEvents.NameBioTxt
         local arg1 = ImportantArgs.BioTxt
-        re:FireSever(arg1,args.arg1)
+        re:FireServer(arg1,args.arg1)
 
     elseif event == "Job" then 
         local re = ImportantEvents.Job
         local arg1 = ImportantArgs.Job
-        re:FireSever(arg1,args.arg1,args.arg1,true)
+        re:FireServer(arg1,args.arg1,args.arg1,true)
 
     elseif event == "NameColor" then
         local re = ImportantEvents.NameBioColor
         local arg1 = ImportantArgs.NameColor
-        re:FireSever(arg1,args.arg1)
+        re:FireServer(arg1,args.arg1)
 
     elseif event == "BioColor" then
         local re = ImportantEvents.NameBioColor
         local arg1 = ImportantArgs.BioColor
-        re:FireSever(arg1,args.arg1)
+        re:FireServer(arg1,args.arg1)
 
     end
 end
