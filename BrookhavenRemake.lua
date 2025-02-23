@@ -365,19 +365,19 @@ spawn(function()
     pcall(function()
         while wait(0.1) do
 
-            if Speed[2] == true then
+            if Speed.as == true then
                 local hum = GetHum()
-                hum.WalkSpeed = Speed[1]
+                hum.WalkSpeed = Speed.s
             end
             
-            if JumpHeight[2] == true then
+            if JumpHeight.ajh == true then
                 local hum = GetHum()
-                hum.JumpHeight = JumpHeight[1]
+                hum.JumpHeight = JumpHeight.jh
             end
 
-            if JumpPower[2] == true then
+            if JumpPower.ajp == true then
                 local hum = GetHum()
-                hum.JumpPower = JumpPower[1]
+                hum.JumpPower = JumpPower.jp
             end
 
             if not LibOk then
