@@ -1,0 +1,199 @@
+local lib = {}
+
+local keylib = local KeyGuardLibrary = loadstring(game:HttpGet("https://cdn.keyguardian.org/library/v1.0.0.lua"))()
+
+local function Notify(title,txt,dur)
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+    OrionLib:MakeNotification({
+        Name = title,
+        Content = txt,
+        Image = "rbxassetid://96495493705878",
+        Time = dur
+    })
+end
+
+function lib:Init(Settings)
+
+	local PrivateToken = Settings.PT or nil
+	local PublicToken = Settings.PUT or nil
+	local Callback = Settings.Callback or function() print("Key Succes") end
+    
+    local valid = "valid"
+    local invalid = "invalid"
+
+	if Settings.Discord then
+		local Discord = Settings.Discord
+	end
+
+    keylib.Set({
+        publicToken = PublicToken,
+        privateToken = PrivateToken,
+        trueData = valid,
+        falseData = invalid,
+    })
+
+	local TS = Settings.Title
+
+	local ui = Instance.new("ScreenGui")
+
+    if gethui then
+        ui.Parent = gethui()
+    elseif syn and syn.protect_gui then 
+        syn.protect_gui(ui)
+        ui.Parent = CoreGui
+    end
+	
+	local frame = Instance.new("Frame",ui)
+	local fc = Instance.new("UICorner",frame)
+	
+	local Textbox = Instance.new("TextBox",frame)
+	local tbc = Instance.new("UICorner",Textbox)
+	
+	local GetKey = Instance.new("TextButton",frame)
+	local gc = Instance.new("UICorner",GetKey)
+	
+	local VerifyKey = Instance.new("TextButton",frame)
+	local vc = Instance.new("UICorner",VerifyKey)
+	
+	local DiscordButton = Instance.new("ImageButton",frame)
+	local dc = Instance.new("UICorner",DiscordButton)
+	
+	local Quit = Instance.new("TextButton",frame)
+	local QS = Instance.new("UIStroke",Quit)
+	
+	local Title = Instance.new("TextLabel",frame)
+
+	ui.Name = "KeyGuardianKeySystemUI"
+	ui.IgnoreGuiInset = true
+	
+	frame.Name = "MainFrame"
+	frame.Size = UDim2.new(0,500,0,250)
+	frame.AnchorPoint = Vector2.new(0.5,0.5)
+	frame.Position = UDim2.new(0.5,0,0.5,0)
+	fc.CornerRadius = UDim.new(0,10)
+	frame.BackgroundColor3 = Color3.fromRGB(52,52,52)
+	Instance.new("UIDragDetector",frame)
+
+	Textbox.Name = "Keybox"
+	Textbox.Font = "Montserrat"
+	Textbox.Text = ""
+	Textbox.TextScaled = true
+	Textbox.PlaceholderText = "Key Here"
+	Textbox.Size = UDim2.new(0,450,0,40)
+	Textbox.AnchorPoint = Vector2.new(0.5,0.5)
+	Textbox.Position = UDim2.new(0.5,0,0.5,0)
+	Textbox.BackgroundColor3 = Color3.fromRGB(78,78,78)
+	Textbox.TextColor3 = Color3.fromRGB(255,255,255)
+	tbc.CornerRadius = UDim.new(0,20)
+
+	GetKey.Name = "GetLink"
+	GetKey.Font = "Montserrat"
+	GetKey.TextScaled = true
+	GetKey.Text = "Get Link"
+	GetKey.AnchorPoint = Vector2.new(0.5,0.5)
+	
+	if Settings.Discord then
+		
+		VerifyKey.Size = UDim2.new(0,175,0,50)
+		
+		GetKey.Position = UDim2.new(0,325,0,200)
+		GetKey.Size = UDim2.new(0,175,0,50)
+		
+	else
+		
+		VerifyKey.Size = UDim2.new(0,225,0,50)
+		
+		GetKey.Position = UDim2.new(0,375,0,200)
+		GetKey.Size = UDim2.new(0,225,0,50)
+		
+	end
+	
+	GetKey.BackgroundColor3 = Color3.fromRGB(64,64,64)
+	GetKey.BorderSizePixel = 0
+	GetKey.TextColor3 = Color3.fromRGB(255,255,255)
+	gc.CornerRadius = UDim.new(0,8)
+
+	VerifyKey.Name = "VerifyKey"
+	VerifyKey.Font = "Montserrat"
+	VerifyKey.TextScaled = true
+	VerifyKey.Text = "Verify Key"
+	VerifyKey.AnchorPoint = Vector2.new(0.5,0.5)
+	VerifyKey.Position = UDim2.new(0,125,0,200)
+	VerifyKey.BackgroundColor3 = Color3.fromRGB(64,64,64)
+	VerifyKey.BorderSizePixel = 0
+	VerifyKey.TextColor3 = Color3.fromRGB(255,255,255)
+	vc.CornerRadius = UDim.new(0,8)
+
+
+	Quit.Name = "Quit"
+	Quit.Font = "Montserrat"
+	Quit.AnchorPoint = Vector2.new(-0.9,-0.9)
+	Quit.Size = UDim2.new(0,50,0,35)
+	Quit.Text = "X"
+	Quit.TextColor3 = Color3.fromRGB(255,0,0)
+	Quit.BackgroundTransparency = 1
+	Quit.TextScaled = true
+	QS.Color = Color3.fromRGB(255,0,0)
+	QS.Thickness = 2
+	
+	if Settings.Discord then
+	DiscordButton.Name = "Discord"
+	DiscordButton.Image = "rbxassetid://76181608348088"
+	DiscordButton.Size = UDim2.new(0,50,0,50)
+	DiscordButton.Position = UDim2.new(0,430,0,175)
+	DiscordButton.BorderSizePixel = 0
+	DiscordButton.BackgroundColor3 = Color3.fromRGB(64,64,64)
+	dc.CornerRadius = UDim.new(0,8)
+	
+	DiscordButton.MouseButton1Click:Connect(function()
+		setclipboard(Discord)
+        Notify("Key System","Copied!!!")
+	end)
+	else
+		DiscordButton:Destroy()
+	end
+
+	Title.Font = "Montserrat"
+	Title.TextScaled = true
+	Title.Text = "Key System"
+	Title.AnchorPoint = Vector2.new(-100,0)
+	Title.Position = UDim2.new(0,200,0,0)
+	Title.Size = UDim2.new(0,100,0,35)
+	Title.TextColor3 = Color3.fromRGB(255,255,255)
+	Title.BackgroundTransparency = 1
+	Title.Text = TS
+	
+	Quit.MouseButton1Click:Connect(function()
+		ui:Destroy()
+	end)
+	
+	GetKey.MouseButton1Click:Connect(function()
+		setclipboard(keylib.getLink())
+        Notify("Key System","Copied!!!")
+	end)
+	
+	VerifyKey.MouseButton1Click:Connect(function()
+		local Default = keylib.validateDefaultKey
+        local Premium = keylib.validatePremiumKey
+        if Default == valid or Premium == valid then
+            Notify("Key System","Key Succes!!!")
+            Callback()
+            ui:Destroy()
+            return true
+        else
+            Notify("Key System","Key Invalid!!!")
+        end
+	end)
+	
+end
+
+lib:Init({
+    PT = "5525b05af99f41af885121d41a65278b" ,
+    PUT = "efe37d10fe6042dc80603871f3b03224",
+    Title = "Amongus",
+    Callback = function()
+        warn("Key Succes!!!")
+    end
+})
+
+return lib
