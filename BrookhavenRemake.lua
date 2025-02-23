@@ -1,12 +1,6 @@
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Brookhaven Script🏠🌳", -- Starter Notification
-    Text = "Key Sytem loading", 
-    Icon = "rbxassetid://1234567890", 
-    Duration = 5 
-})
 function Notify(title,txt,dur)
     local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
     OrionLib:MakeNotification({
@@ -15,7 +9,9 @@ function Notify(title,txt,dur)
         Image = "rbxassetid://96495493705878",
         Time = dur
     })
-    end
+end
+Notify("Brookhaven Script","Loading key system...")
+
 local foldername = "Starkield Key System Saved.txt"
 local Lib1 = loadstring(game:HttpGet(("https://pastebin.com/raw/87ESbY5w")))()
 local KeyLib = loadstring(game:HttpGet("https://cdn.keyguardian.org/library/v1.0.0.lua"))()
@@ -27,12 +23,7 @@ local valid = "Key Valid Key Succes"
 local invalid = "Key Invalid Key not Succes"
 if isfile(foldername) then
     key = readfile(foldername)
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Brookhaven Script🏠🌳", -- Starter Notification
-    Text = "Last Key Used Loaded!!!", 
-    Icon = "rbxassetid://1234567890", 
-    Duration = 5 
-})
+    Notify("Key System","last key has been loaded")
 end
 
 KeyLib.Set({
@@ -59,12 +50,7 @@ KSTab:AddButton({
     Name = "Get Link",
     Callback = function()
     setclipboard(KeyLib.getLink())
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Brookhaven Script🏠🌳", -- Starter Notification
-    Text = "Link Copied!!!", 
-    Icon = "rbxassetid://14544326383", 
-    Duration = 5 
-})
+    Notify("Key System","Link Copied, Good Luck U Will Need It...")
     end
 })
 
@@ -83,12 +69,7 @@ KSTab:AddButton({
     local PreRes = KeyLib.validatePremiumKey(key)
     if DefRes == valid or PreRes == valid then
 
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Brookhaven Script🏠🌳", -- Starter Notification
-    Text = "Key Succes And Key Saved", 
-    Icon = "rbxassetid://1234567890", 
-    Duration = 5 
-    })
+    Notify("Key System","Key Succes")
     writefile(foldername,key)
     Lib1:Destroy()
 
@@ -104,13 +85,15 @@ end
 
 local Lib = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+Notify("Brookhaven Script","Setuping up all...")
+
 Notify("Jailbreak Script","Setuping all",3)
 local RayfieldThemeList = {"Default","Ocean","AmberGlow","Light","Amethyst","Green","Bloom","DarkBlue","Serenity"}
 local Win = Lib:CreateWindow({
    Name = "Jailbreak",
    Icon = "banana",
    LoadingTitle = "SS. Starkield",
-   LoadingSubtitle = "Starkield Series Scripts",
+   LoadingSubtitle = "Starkield Deluxe Scripts",
    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
    DisableRayfieldPrompts = true,
