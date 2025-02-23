@@ -145,7 +145,7 @@ local Noclip = false
 
 local ESPBOXSIZE = Vector3.new(3,5,1)
 
-local plr = game.Players.LocalPlayer
+local plr = game:GetService("Players").LocalPlayer
 
 local ImportantEvents = { -- All Important Events That I Know
 SpawnCar = game:GetService("ReplicatedStorage").RE["1Ca1r"],
