@@ -343,6 +343,7 @@ spawn(function()
         local lastUpdate = tick()
 
         game:GetService("RunService").RenderStepped:Connect(function()
+        if LibOk then
             if updfps then
             local currentTime = tick()
             local deltaTime = currentTime - lastUpdate
@@ -351,10 +352,7 @@ spawn(function()
             fps = math.floor(1 / deltaTime)
                 FPSText:Set("Actual FPS: "..tostring(fps))
             end
-    
-            if not LibOk then
-                    break
-            end
+        end
         end)
     end)
 end)
