@@ -125,11 +125,18 @@ local Win = Lib:CreateWindow({
 })
 local LibOk = true
 
+local HomeTab = Win:CreateTab("Home","home")
+
+HomeTab:CreateButton({
+    Name = "Quit",
+    Callback = function()
+        Lib:Destroy()
+        LibOk = false
+    end
+})
 
 -- Misc Code
 local updfps
-
-local HomeTab = Win:CreateTab("Home","home")
 
 local ScriptsTab = Win:CreateTab("Scripts","scroll-text")
 
@@ -174,7 +181,7 @@ function FireEvent(event,args)
     elseif event == "Name" then 
         local re = ImportantEvents.NameBioTxt
         local arg1 = ImportantArgs.NameTxt
-        re:FireSever(arg1,args.arg1)
+        re:FireServer(arg1,args.arg1)
 
     elseif event == "Bio" then 
         local re = ImportantEvents.NameBioTxt
@@ -241,13 +248,7 @@ FireEvent("NameColor",{arg1 = Color3.fromRGB(122,0,122)})
 FireEvent("Bio",{arg1 = "I Use Deluxe Scripts"})
 FireEvent("BioColor",{arg1 = Color3.fromRGB(255,0,0)})
 
-HomeTab:CreateButton({
-    Name = "Quit",
-    Callback = function()
-        Lib:Destroy()
-        LibOk = false
-    end
-})
+
 
 HomeTab:CreateDropdown({
     Name = "Custom Theme",
