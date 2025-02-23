@@ -186,12 +186,12 @@ function FireEvent(event,args)
         local arg1 = ImportantArgs.Job
         re:FireSever(arg1,args.arg1,args.arg1,true)
 
-    elseif event = "NameColor" then
+    elseif event == "NameColor" then
         local re = ImportantEvents.NameBioColor
         local arg1 = ImportantArgs.NameColor
         re:FireSever(arg1,args.arg1)
 
-    elseif event = "BioColor" then
+    elseif event == "BioColor" then
         local re = ImportantEvents.NameBioColor
         local arg1 = ImportantArgs.BioColor
         re:FireSever(arg1,args.arg1)
