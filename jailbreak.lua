@@ -19,7 +19,7 @@ OrionLib:MakeNotification({
 })
 end
 
-Notify("Jailbreak Script","Starting All",3)
+Notify("Jailbreak Script","Setuping all",3)
 local RayfieldThemeList = {"Default","Ocean","AmberGlow","Light","Amethyst","Green","Bloom","DarkBlue","Serenity"}
 local Win = Lib:CreateWindow({
    Name = "Jailbreak",
