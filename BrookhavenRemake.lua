@@ -3,7 +3,7 @@ if game:IsLoaded() == false then
 end
 
 function Notify(title,txt,dur)
-    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+    local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/87ESbY5w')))()
     OrionLib:MakeNotification({
         Name = title,
         Content = txt,
@@ -14,7 +14,7 @@ end
 Notify("Brookhaven Script","Loading key system...")
 
 local foldername = "Starkield Key System Saved.txt"
-local Lib1 = loadstring(game:HttpGet(("https://raw.githubusercontent.com/DynamicHack189/siad/refs/heads/main/BrookhavenRemake.lua?token=GHSAT0AAAAAAC7LRTNIOOOCS6R47J3S6GQWZ53JA5A")))()
+local Lib1 = loadstring(game:HttpGet(("https://pastebin.com/raw/87ESbY5w")))()
 local KeyLib = loadstring(game:HttpGet("https://cdn.keyguardian.org/library/v1.0.0.lua"))()
 local KSW = Lib1:MakeWindow({Name = "Starkiel Scripts | Brookhaven🏠🌳 KEY SYSTEM", HidePremium = false, SaveConfig = true, ConfigFolder = "SSB2"})
 local pubt = "efe37d10fe6042dc80603871f3b03224"
@@ -435,12 +435,7 @@ end)
 
 
 else
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Key System", -- Starter Notification
-    Text = "Key is invalid!!!", 
-    Icon = "rbxassetid://1234567890", 
-    Duration = 5 
-})
+    Notify("Key System","Please insert a valid key")
     end
     end
 })
