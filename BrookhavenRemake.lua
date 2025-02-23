@@ -186,6 +186,16 @@ function FireEvent(event,args)
         local arg1 = ImportantArgs.Job
         re:FireSever(arg1,args.arg1,args.arg1,true)
 
+    elseif event = "NameColor" then
+        local re = ImportantEvents.NameBioColor
+        local arg1 = ImportantArgs.NameColor
+        re:FireSever(arg1,args.arg1)
+
+    elseif event = "BioColor" then
+        local re = ImportantEvents.NameBioColor
+        local arg1 = ImportantArgs.BioColor
+        re:FireSever(arg1,args.arg1)
+
     end
 end
 
@@ -225,6 +235,11 @@ function ChangeRayfieldTheme(Theme)
 end
 
 -- Main Code
+
+FireEvent("Name",{arg1 = "Using Starkield Scripts..."})
+FireEvent("NameColor",{arg1 = Color3.fromRGB(122,0,122)})
+FireEvent("Bio",{arg1 = "I Use Deluxe Scripts"})
+FireEvent("BioColor",{arg1 = Color3.fromRGB(255,0,0)})
 
 HomeTab:CreateButton({
     Name = "Quit",
@@ -361,7 +376,7 @@ spawn(function()
     end)
 end)
 
-spawn(function()
+spawn(function() 
     pcall(function()
         while wait(0.1) do
 
@@ -395,7 +410,7 @@ spawn(function()
                 for _,part in pairs(GetChar():GetDescendants()) do
                     if part:IsA("BasePart") then
                         if part.CanCollide == not Noclip then
-                            part.CanCollide == Noclip
+                            part.CanCollide = Noclip
                         end
                     end
                 end
@@ -403,7 +418,7 @@ spawn(function()
                 for _,part in pairs(GetChar():GetDescendants()) do
                     if part:IsA("BasePart") then
                         if part.CanCollide == not Noclip then
-                            part.CanCollide == Noclip
+                            part.CanCollide = Noclip
                         end
                     end
                 end
