@@ -214,17 +214,11 @@ function GetChar()
 end
 
 function GetHum()
-    local s,e,hum pcall(function()
-        return plr.Character.Humanoid
-    end)
-    return hum
+    return plr.Character.Humanoid
 end
 
 function GetRoot()
-    local s,e,hroot pcall(function()
-        return plr.Character.HumanoidRootPart
-    end)
-    return hroot
+    return plr.Character.HumanoidRootPart
 end
 
 function FindOnDescendents(Name:String,Obj)
