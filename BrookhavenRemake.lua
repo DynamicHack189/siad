@@ -337,6 +337,10 @@ MainTab:CreateDivider()
 
 -- Loops
 
+
+
+
+
 spawn(function()
     pcall(function()
         local fps = 0
