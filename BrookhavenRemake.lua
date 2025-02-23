@@ -365,7 +365,7 @@ spawn(function()
     pcall(function()
         while wait(0.1) do
 
-            if Speed.[2] == true then
+            if Speed[2] == true then
                 local hum = GetHum()
                 hum.WalkSpeed = Speed[1]
             end
