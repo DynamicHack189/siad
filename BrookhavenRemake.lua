@@ -550,6 +550,7 @@ end)
 
 -- Events
 
+
 game.workspace.Vehicles.ChildRemoving:Connect(function()
     local carTable = {}
     for _,plr in pairs(game.Players:GetChildren()) do
@@ -564,6 +565,7 @@ game.workspace.Vehicles.ChildRemoving:Connect(function()
     
     fdd:Refresh(carTable)
 end)
+
 
 game.workspace.Vehicles.ChildAdded:Connect(function()
     local carTable = {}
