@@ -432,12 +432,6 @@ MainTab:CreateSlider({
     end
 })
 
-
-
-
-
-
-
 local fdd = MainTab:CreateDropdown({
     Name = "Car To Fling",
     Options = {"The Cars","Are Not Loaded Pls","Wait A Fer Seconds..."},
@@ -445,7 +439,7 @@ local fdd = MainTab:CreateDropdown({
     MultipleOptions = false,
     Callback = function(opt)
         local option = opt[1]
-        CarFling.ctf = option
+        FlingCar.ctf = option
     end
 })
 
@@ -456,7 +450,7 @@ MainTab:CreateSlider({
     Suffix = "Deluxe & Op",
     CurrentValue = 1,
     Callback = function(v)
-        FlinCar.fm = v
+        FlingCar.fm = v
     end
 })
 
