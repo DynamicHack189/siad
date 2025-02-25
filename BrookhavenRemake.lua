@@ -148,6 +148,7 @@ local Gravity = {g = 192, ag = false}
 local Speed = {s = 16, as = false}
 local JumpPower = {jp = 50, ajp = false}
 local JumpHeight = {jh = 7.2, ajh = false}
+local FlingCar = {ctf = "", fm = 1, nf = Vector3.new(10000, 10000, 10000), nv = Vector3.new(10000, 15000, 10000)}
 local Noclip = false
 
 local ESPBOXSIZE = Vector3.new(3,5,1)
@@ -203,6 +204,20 @@ function FireEvent(event,args)
         local arg1 = ImportantArgs.BioColor
         re:FireServer(arg1,args.arg1)
 
+    end
+end
+
+function StopVelocity()
+    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+    rootPart.Velocity = Vector3.new(0, 0, 0)
+    rootPart.RotVelocity = Vector3.new(0, 0, 0)
+    rootPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+    rootPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+    for _, v in ipairs(rootPart:GetChildren()) do
+        if v:IsA("BodyVelocity") or v:IsA("BodyForce") then
+            v:Destroy()
+        end
     end
 end
 
@@ -344,6 +359,38 @@ MainTab:CreateToggle({
 })
 
 MainTab:CreateDivider()
+
+MainTab:CreateSlider({
+    Name = "Car Turbo",
+    Range = {0,10000},
+    Increment = 1,
+    Suffix = "Deluxe & Op",
+    CurrentValue = 11,
+    Callback = function(v)
+        pcall(function()
+            local CarName = LocalPlayer.Name.."Car"
+            local Car = game.workspace.Vehicles:FindFirstChild(CarName)
+        
+            Car.Body.VehicleSeat.Turbo.Value = v
+        end)
+    end
+})
+
+MainTab:CreateSlider({
+    Name = "Car Top Speed",
+    Range = {0,10000},
+    Increment = 1,
+    Suffix = "Deluxe & Op",
+    CurrentValue = 25,
+    Callback = function(v)
+        pcall(function()
+            local CarName = LocalPlayer.Name.."Car"
+            local Car = game.workspace.Vehicles:FindFirstChild(CarName)
+        
+            Car.Body.VehicleSeat.TopSpeed.Value = v
+        end)
+    end
+})
 
 -- Loops
 
