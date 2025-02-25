@@ -408,7 +408,7 @@ MainTab:CreateSlider({
     CurrentValue = 11,
     Callback = function(v)
         pcall(function()
-            local CarName = LocalPlayer.Name.."Car"
+            local CarName = game.Players.LocalPlayer.Name.."Car"
             local Car = game.workspace.Vehicles:FindFirstChild(CarName)
         
             Car.Body.VehicleSeat.Turbo.Value = v
@@ -424,7 +424,7 @@ MainTab:CreateSlider({
     CurrentValue = 25,
     Callback = function(v)
         pcall(function()
-            local CarName = LocalPlayer.Name.."Car"
+            local CarName = game.Players.LocalPlayer.Name.."Car"
             local Car = game.workspace.Vehicles:FindFirstChild(CarName)
         
             Car.Body.VehicleSeat.TopSpeed.Value = v
