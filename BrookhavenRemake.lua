@@ -1,6 +1,3 @@
-if game:IsLoaded() == false then
-    game.Loaded:Wait()
-end
 
 function Notify(title,txt,dur)
     local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/87ESbY5w')))()
