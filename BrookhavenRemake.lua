@@ -456,7 +456,9 @@ MainTab:CreateSlider({
 
 MainTab:CreateButton({
     Name = "Fling A Car",
-    Callback = FlingACar()
+    Callback = function()
+        FlingACar()
+    end
 })
 
 -- Loops
@@ -514,23 +516,6 @@ spawn(function() -- Main Loop
     end)
 end)
 
-spawn(function() -- Cars Loop
-    while wait(0.3) do
-        local carTable = {}
-        for _,plr in pairs(game.Players:GetChildren()) do
-            local Vehicles = game.workspace.Vehicles -- Get Vehicles Folder...
-            
-            if Vehicles:FindFirstChild(plr.Name.."Car") and plr ~= LocalPlayer then -- Valid Car...
-                table.insert(carTable,plr.Name.."Car") -- Insert Car name...
-            end
-        end
-
-        -- Refresh Section...
-
-        fdd:Refresh(carTable)
-    end
-end)
-
 spawn(function() -- Noclip Loop
     pcall(function()
         while wait(0.5) do
@@ -560,6 +545,37 @@ spawn(function() -- Noclip Loop
     end)
 end)
 
+-- Events
+
+game.workspace.Vehicles:ChildRemoving:Connect(function()
+    local carTable = {}
+    for _,plr in pairs(game.Players:GetChildren()) do
+        local Vehicles = game.workspace.Vehicles -- Get Vehicles Folder...
+                
+        if Vehicles:FindFirstChild(plr.Name.."Car") and plr ~= LocalPlayer then -- Valid Car...
+            table.insert(carTable,plr.Name.."Car") -- Insert Car name...
+        end
+    end
+    
+    -- Refresh Section...
+    
+    fdd:Refresh(carTable)
+end)
+
+game.workspace.Vehicles:ChildAdded:Connect(function()
+    local carTable = {}
+    for _,plr in pairs(game.Players:GetChildren()) do
+        local Vehicles = game.workspace.Vehicles -- Get Vehicles Folder...
+                
+        if Vehicles:FindFirstChild(plr.Name.."Car") and plr ~= LocalPlayer then -- Valid Car...
+            table.insert(carTable,plr.Name.."Car") -- Insert Car name...
+        end
+    end
+    
+    -- Refresh Section...
+    
+    fdd:Refresh(carTable)
+end)
 
 
 else
