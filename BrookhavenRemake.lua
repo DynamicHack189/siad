@@ -91,9 +91,9 @@ Notify("Brookhaven Script","Setuping up all...")
 Notify("Jailbreak Script","Setuping all",3)
 local RayfieldThemeList = {"Default","Ocean","AmberGlow","Light","Amethyst","Green","Bloom","DarkBlue","Serenity"}
 local Win = Lib:CreateWindow({
-   Name = "Jailbreak",
+   Name = "Brookhaven",
    Icon = "banana",
-   LoadingTitle = "SS. Starkield",
+   LoadingTitle = "Remake",
    LoadingSubtitle = "Starkield Deluxe Scripts",
    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
@@ -250,6 +250,46 @@ function ChangeRayfieldTheme(Theme)
     Win.ModifyTheme(Theme)
 end
 
+function FlingACar()
+    local CarToFling = game.workspace.Vehicles:FindFirstChild(FlingCar.ctf.."Car")
+    if CarToFling then
+        local seat = FindOnDescendents("VehicleSeat")
+        if seat and seat.Ocuppant ~= nil then
+            local root = GetRoot()
+            local Hum = GetHum()
+            local pos1 = root.CFrame
+            if root then 
+                local Velocity = Instance.new("BodyVelocity")
+                local NormalForce = FlingCar.nf
+                local ForceMult = FlingCar.fm
+
+                Velocity.MaxForce = Vector3.new(NormalForce.X*ForceMult,NormalForce.Y*ForceMult,NormalForce.Z*ForceMult)
+                Velocity.P = 7500
+
+                root.CFrame = seat.CFrame
+
+                Velocity.Velocity = Vector3.new(10000,15000,10000)
+                task.wait(math.random(5,8))
+                Velocity:Destroy()
+                Hum:ChangeState(Enum.HumanoidStateType.Jumping)
+
+                task.wait(0.5)
+
+                StopVelocity()
+                root.CFrame = pos1
+
+                Notify("Brookhaven Script","you're having a good time ya?")
+            else
+                Notify("Brookhaven Script","Root Part Cant Be Finded!")
+            end
+        else
+            Notify("Brookhaven Script","The Main Seat Is Already Taked!")
+        end
+    else
+        Notify("Brookhaven Script","Car Cant be Indentified or You Dont Selext A Car!")
+    end
+end
+
 -- Main Code
 
 FireEvent("Name",{arg1 = "Using Starkield Scripts..."})
@@ -392,6 +432,32 @@ MainTab:CreateSlider({
     end
 })
 
+local fdd = MainTab:CreateDropdown({
+    Name = "Car To Fling",
+    Options = {"The Cars","Are Not Loaded Pls","Wait A Fer Seconds..."},
+    CurrentOption = {"No Car Selected Yet"},
+    MultipleOptions = false,
+    Callback = function(opt[1])
+        CarFling.ctf = opt
+    end
+})
+
+MainTab:CreateSlider({
+    Name = "Fling A Car Force Multiplier",
+    Range = {0,100},
+    Increment = 1,
+    Suffix = "Deluxe & Op",
+    CurrentValue = 1,
+    Callback = function(v)
+        FlinCar.fm = v
+    end
+})
+
+MainTab:CreateButton({
+    Name = "Fling A Car",
+    Callback = FlingACar()
+})
+
 -- Loops
 
 
@@ -418,7 +484,7 @@ spawn(function()
     end)
 end)
 
-spawn(function() 
+spawn(function() -- Main Loop
     pcall(function()
         while wait(0.1) do
 
@@ -437,6 +503,8 @@ spawn(function()
                 hum.JumpPower = JumpPower.jp
             end
 
+
+
             if not LibOk then
                 break
             end
@@ -445,7 +513,24 @@ spawn(function()
     end)
 end)
 
-spawn(function()
+spawn(function() -- Cars Loop
+    while wait(0.3) do
+        local carTable = {}
+        for _,plr in pairs(game.Players:GetChildren()) do
+            local Vehicles = game.workspace.Vehicles -- Get Vehicles Folder...
+            
+            if Vehicles:FindFirstChild(plr.Name.."Car") and plr ~= LocalPlayer then -- Valid Car...
+                table.insert(carTable,plr.Name.."Car") -- Insert Car name...
+            end
+        end
+
+        -- Refresh Section...
+
+        fdd:Refresh(carTable)
+    end
+end)
+
+spawn(function() -- Noclip Loop
     pcall(function()
         while wait(0.5) do
             if Noclip then
