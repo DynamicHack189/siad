@@ -296,8 +296,11 @@ end
 -- Main Code
 
 FireEvent("Name",{arg1 = "Using Starkield Scripts..."})
+
 FireEvent("NameColor",{arg1 = Color3.fromRGB(122,0,122)})
+
 FireEvent("Bio",{arg1 = "I Use Deluxe Scripts"})
+
 FireEvent("BioColor",{arg1 = Color3.fromRGB(255,0,0)})
 
 
@@ -466,10 +469,6 @@ MainTab:CreateButton({
 
 -- Loops
 
-
-
-
-
 spawn(function()
     pcall(function()
         local fps = 0
@@ -519,39 +518,39 @@ spawn(function() -- Main Loop
     end)
 end)
 
-spawn(function() -- Noclip Loop
+spawn(function() -- Nolcip
     pcall(function()
-        while wait(0.5) do
-            if Noclip then
-                for _,part in pairs(GetChar():GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        if part.CanCollide == not Noclip then
-                            part.CanCollide = Noclip
-                        end
-                    end
-                end
-            else
-                for _,part in pairs(GetChar():GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        if part.CanCollide == not Noclip then
-                            part.CanCollide = Noclip
-                        end
-                    end
+        local RunService = game:GetService("RunService")
+        local character = GetChar()
+        
+        local originalCollision = {}
+        if character then
+            for _, part in pairs(character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    originalCollision[part] = part.CanCollide
                 end
             end
-
-            if not LibOk then
-                break
-            end
-
         end
+
+        RunService.Stepped:Connect(function()
+            if not LibOk then return end
+            
+            local currentCharacter = GetChar()
+            if currentCharacter then
+                for _, part in pairs(currentCharacter:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        if Noclip then
+                            part.CanCollide = false
+                        else
+                            part.CanCollide = originalCollision[part] or true
+                        end
+                    end
+                end
+            end
+        end)
     end)
 end)
-
--- Events
-
-
-game.workspace.Vehicles.ChildRemoving:Connect(function()
+game.workspace.Vehicles.ChildRemoving:Connect(function() 
     local carTable = {}
     for _,plr in pairs(game.Players:GetChildren()) do
         local Vehicles = game.workspace.Vehicles -- Get Vehicles Folder...
@@ -565,7 +564,6 @@ game.workspace.Vehicles.ChildRemoving:Connect(function()
     
     fdd:Refresh(carTable)
 end)
-
 
 game.workspace.Vehicles.ChildAdded:Connect(function()
     local carTable = {}
