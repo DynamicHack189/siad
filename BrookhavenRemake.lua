@@ -533,6 +533,7 @@ spawn(function() -- Nolcip
         end
 
         RunService.Stepped:Connect(function()
+            task.wait(0.5)
             if not LibOk then return end
             
             local currentCharacter = GetChar()
