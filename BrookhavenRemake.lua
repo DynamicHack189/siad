@@ -437,8 +437,9 @@ local fdd = MainTab:CreateDropdown({
     Options = {"The Cars","Are Not Loaded Pls","Wait A Fer Seconds..."},
     CurrentOption = {"No Car Selected Yet"},
     MultipleOptions = false,
-    Callback = function(opt[1])
-        CarFling.ctf = opt
+    Callback = function(opt)
+        local option = opt[1]
+        CarFling.ctf = option
     end
 })
 
