@@ -2,8 +2,8 @@ if game:IsLoaded() == false then
     game.Loaded:Wait()
 end
 
+local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/87ESbY5w')))()
 function Notify(title,txt,dur)
-    local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/87ESbY5w')))()
     OrionLib:MakeNotification({
         Name = title,
         Content = txt,
@@ -43,6 +43,7 @@ local KSTab = KSW:MakeTab({
 KSTab:AddButton({
     Name = "Exit",
     Callback = function()
+    OrionLib:Destroy()
     Lib1:Destroy()
     end
 })
@@ -68,6 +69,7 @@ KSTab:AddButton({
     Callback = function(txt)
     local DefRes = KeyLib.validateDefaultKey(key)
     local PreRes = KeyLib.validatePremiumKey(key)
+    print(DefRes,PreRes)
     if DefRes == valid or PreRes == valid then
 
     Notify("Key System","Key Succes")
@@ -130,6 +132,7 @@ local HomeTab = Win:CreateTab("Home","home")
 HomeTab:CreateButton({
     Name = "Quit",
     Callback = function()
+        OrionLib:Destroy()
         Lib:Destroy()
         LibOk = false
     end
@@ -311,14 +314,14 @@ HomeTab:CreateDropdown({
     end
 })
 
-local FPSText = HomeTab:CreateLabel("Actual FPS: x")
-
 HomeTab:CreateToggle({
     Name = "Update FPS",
     Callback = function(v)
         updfps = v
     end
 })
+
+local FPSText = HomeTab:CreateLabel("Actual FPS: x")
 
 MainTab:CreateSlider({
     Name = "Speed",
