@@ -1,3 +1,15 @@
+-- Things
+--[[ 
+
+local args = { donut get event | just allowed near distance
+    [1] = "!8730d45a-b679-4916-9071-9f4778c4ce5d",
+    [2] = workspace:WaitForChild("TouchTrigger"):WaitForChild("Donut")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(args))
+
+]]
+
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
@@ -6,7 +18,41 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local LocalPlayer = Players.LocalPlayer
 
--- Save Things
+local AllGunsName = {
+    "Pistol" = "Pistol",
+    "Shotgun" = "Shotgun",
+    "Rifle" = "Rifle",
+    "Revolver" = "Revolver",
+    "Flintlock" = "Flintlock",
+    "AK47" = "AK47",
+    "Sword" = "Sword",
+    "Uzi = Uzi",
+    "ForcefieldLauncher" = "ForcefieldLauncher",
+    "PlasmaPistol" = "PlasmaPistol",
+    "PlasmaShotgun" = "PlasmaShotgun",
+    "Sniper" = "Sniper"
+}
+
+local AllCriminalsItemsName = {
+    "Pistol" = true,
+    "Shotgun" = true,
+    "Rifle" = true,
+    "Revolver" = true,
+    "Flintlock" = true,
+    "AK47" = true,
+    "Sword" = true,
+    "Uzi" = true",
+    "ForcefieldLauncher" = true,
+    "PlasmaPistol" = true,
+    "PlasmaShotgun" = true,
+    "Sniper" = true,
+    "Key" = true,
+    "Baton" = true,
+    "C4" = true,
+    "Grenade" = true,
+    "RocketLauncher" = true,
+    "SmokeGrenade" = true
+}
 
 
 function Notify(title,txt,dur)
@@ -142,6 +188,98 @@ function ChangeRayfieldTheme(Theme)
 Win.ModifyTheme(Theme)
 end
 
+function VerifyPlayerCriminal(folder)
+    local Criminal = false
+    for _,item in pairs(folder:GetChildren()) do
+        if AllCriminalsItemsName[item.Name] then
+            Criminal = true
+        end
+    end
+    return Criminal
+end
+
+function FireEvent(event,args)
+    -- functArgs
+    if event == "Pickpocket" then 
+        local arg1 = args[1]
+        if arg1 then
+            local functArgs = {
+              [1] = "!27398080-5e50-4d50-b4a7-f01ca86f80a8",
+              [2] = arg1
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))
+        end
+    elseif event == "Gun" then
+
+        local arg1 = args[1]
+
+        if arg1 = "all" then
+            for gun,_ in pairs(AllGunsName) do
+            local functArgs = {
+                [1] = "!4c35c24e-8cac-44b8-a0a0-f3aa237162f4",
+                [2] = gun
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))   
+            wait(0.3)
+           end
+        else
+                local functArgs = {
+                    [1] = "!4c35c24e-8cac-44b8-a0a0-f3aa237162f4",
+                    [2] = arg1
+                }
+                
+            game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))   
+        end   
+        
+    elseif event == "Reload" then
+        local arg1 = args[1]
+        if arg1:FindFirstChild("Reload") then 
+            game:GetService("Players").LocalPlayer.Reload:FireServer()
+        end
+    elseif event == "Hijack" then
+        local arg1 = args[1]
+        if arg1 and arg1:IsA("Model") then
+        local functArgs = {
+        [1] = "!cd4485c4-5c24-4d4b-84db-de751b5800c0",
+        [2] = arg1
+        }
+       game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))
+        end
+    elseif event == "EUItem" then
+        local arg1 = args[1]
+        local arg2 = args[2]
+        local functArgs = {
+         [1] = arg2
+        }
+
+       game:GetService("Players").LocalPlayer.Folder[arg1].InventoryEquipRemote:FireServer(unpack(args)):FireServer(unpack(functArgs))
+
+    elseif event == "Pickpocket" then
+    local functArgs = {
+        [1] = "!27398080-5e50-4d50-b4a7-f01ca86f80a8",
+        [2] = args[1]
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))
+    
+    elseif event == "DropItem" then
+        local functArgs = {
+         [1] = "!7764741a-5e63-4898-83bc-de7d750c8122"
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))
+        
+    elseif event == "Arrest" then
+        local functArgs = { -- arrest | just allowed near distance , not allowed specific areas
+        [1] = "!c56aab3d-1287-4c26-9960-82d7ba80ea11",
+        [2] = args[1]
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))
+    end
+end
+
 --[[
 function SendHttpRequest(Data, Url)
     local s, e = pcall(function()
@@ -191,6 +329,11 @@ local Aimbot = false
 local AimbotPolice = true
 
 -- Strings
+
+-- Tables
+
+local AutoArrest = {[1] = false,[2] = 200}
+local AutoPickpocket = {[1] = false,[2] = 200}
 
 -- Misc Code
 
@@ -320,27 +463,6 @@ ScriptsTab:CreateButton({
     end
 })
 
-ScriptsTab:CreateButton({
-    Name = "Btools",
-    Callback = function()
-    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
-    end
-})
-
-ScriptsTab:CreateButton({
-    Name = "Copy You Actual Position",
-    Callback = function()
-    setclipboard(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
-    end
-})
-
-ScriptsTab:CreateButton({
-    Name = "Copy You Actual CFrame",
-    Callback = function()
-    setclipboard(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-    end
-})
-
 -- TP
 
 -- Player
@@ -438,15 +560,18 @@ PlayerTab:CreateToggle({
 -- OP
 
 OPTab:CreateLabel("OP Stuff")
-OPTab:CreateDivider()
 
-OPTab:CreateToggle({
+
+--[[OPTab:CreateToggle({
     Name = "ESP",
     CurrentValue = false,
     Callback = function(v)
        ESP(v)
     end
-})
+})]]
+
+OPTab:CreateDivider()
+OPTab:CreateLabel("OP Misc Stuff")
 
 OPTab:CreateButton({
     Name = "Open Enter Prision Door's (just work whit key)",
@@ -505,26 +630,6 @@ OPTab:CreateButton({
     Name = "Got A Baton",
     Callback = function()
     fireclickdetector(workspace.Givers.Station:WaitForChild("ClickDetector"))
-    end
-})
-
-OPTab:CreateButton({
-    Name = "Got A Donut",
-    Callback = function()
-    local s,e = pcall(function()
-    local Collision = workspace.TouchTrigger:GetChildren()[2]
-    local backpack = game:GetService("Players").LocalPlayer.Folder
-    local hrp = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-
-    local oldCF = Collision.CFrame
-
-    wait(0.1)
-    Collision.CFrame = hrp.CFrame
-    wait(0.3)
-    Collision.CFrame = oldCF
-
-    if not s then warn(e) end
-    end)
     end
 })
 
@@ -612,6 +717,92 @@ OPTab:CreateToggle({
 
    workspace:GetChildren()[1112].Model.Part.CanCollide = not v -- other electric door
    end)
+    end
+})
+
+OPTab:CreateDropdown({
+    Name = "Get A Gun",
+    Options = AllGunsName,
+    MultipleOptions = false,
+    Callback = function(opt)
+        FireEvent("Gun",opt[1])
+    end
+})
+
+OPTab:CreateButton({
+    Name = "Get All Guns",
+    Callback = function()
+        FireEvent("Gun","all")
+    end
+})
+
+OPTab:CreateButton({
+    Name = "Drop You Actual Item",
+    Callback = function()
+        FireEvent("DropItem")
+    end
+})
+
+OPTab:CreateKeybind({
+    Name = "Drop You Actual Item",
+    CurrentBind = "RightCtrl",
+    Callback = function()
+        FireEvent("DropItem")
+    end
+})
+
+OPTab:CreateDivider()
+OPTab:CreateLabel("OP Stuff")
+
+AutoArrest[3] = OPTab:CreateToggle({
+    Name = "Auto Arrest",
+    CurrentValue = false,
+    Callback = function(v)
+        AutoArrest[1] = v
+    end
+})
+
+OPTab:CreateKeybind({
+    Name = "Auto Arrest",
+    CurrentBind = "Insert",
+    Callback = function()
+        AutoArrest[3]:Set(not AutoArrest[1])
+    end
+})
+
+OPTab:CreateSlider({
+    Name = "Auto Arrest Max Distance",
+    Range = {1,200},
+    CurrentValue = 100,
+    Suffix = "Studs",
+    Callback = function(v)
+        AutoArrest[2] = v
+    end
+})
+
+AutoPickpocket[3] = OPTab:CreateToggle({
+    Name = "Auto Pickpocket",
+    CurrentValue = false,
+    Callback = function(v)
+        AutoPickpocket[1] = v
+    end
+})
+
+OPTab:CreateKeybind({
+    Name = "Auto Arrest",
+    CurrentBind = "Insert",
+    Callback = function()
+        AutoPickpocket[3]:Set(not AutoPickpocket[1])
+    end
+})
+
+OPTab:CreateSlider({
+    Name = "Auto Pickpocket Max Distance",
+    Range = {1,200},
+    CurrentValue = 100,
+    Suffix = "Studs",
+    Callback = function(v)
+        AutoPickpocket[2] = v
     end
 })
 
@@ -762,6 +953,66 @@ BotTab:CreateButton({
 
     end
 })]]
+
+spawn(function() -- Auto Loops
+
+    spawn(function() -- Auto Arrest
+        pcall(function()
+            while wait(1) do
+                if AutoArrest[1] == true then
+                    for _,plr in pairs(game:GetService("Players"):GetChildren) do
+                        local IsCriminal = VerifyPlayerCriminal(plr.Folder)
+                        if IsCriminal == true then
+                            local chr = plr.Character
+                            if chr then
+                                local rootPart = chr.HumanoidRootPart
+                                local plrRoot = GetHRP()
+                                if rootPart and plrRoot then
+                                    local mag = (plrRoot.Position - rootPart.Position).magnitude
+                                    if mag < AutoArrest[2] then
+                                        FireEvent("Arrest",plr.Name)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                if not LibOk then
+                    break
+                end
+            end
+        end)
+    end)
+
+    spawn(function() -- Auto Pickpocket
+        pcall(function()
+            while wait(1) do
+                if AutoPickpocket[1] == true then
+                    for _,plr in pairs(game:GetService("Players"):GetChildren) do
+                        local IsPolice = plr.Team
+                        if IsPolice == "Police" then
+                            local chr = plr.Character
+                            if chr then
+                                local rootPart = chr.HumanoidRootPart
+                                local plrRoot = GetHRP()
+                                if rootPart and plrRoot then
+                                    local mag = (plrRoot.Position - rootPart.Position).magnitude
+                                    if mag < AutoPickpocket[2] then
+                                        FireEvent("Pickpocket",plr.Name)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                if not LibOk then
+                    break
+                end
+            end
+        end)
+    end)
+
+end)
 
 -- Main loop
 spawn(function()
