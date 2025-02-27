@@ -1,15 +1,3 @@
--- Things
---[[ 
-
-local args = { donut get event | just allowed near distance
-    [1] = "!8730d45a-b679-4916-9071-9f4778c4ce5d",
-    [2] = workspace:WaitForChild("TouchTrigger"):WaitForChild("Donut")
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(args))
-
-]]
-
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
@@ -277,6 +265,15 @@ function FireEvent(event,args)
         }
 
         game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(functArgs))
+
+    elseif event == "Donut" then
+        local args = { donut get event | just allowed near distance
+            [1] = "!8730d45a-b679-4916-9071-9f4778c4ce5d",
+            [2] = workspace:WaitForChild("TouchTrigger"):WaitForChild("Donut")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("b60d815e-a539-4121-8ee6-ca483801d986"):FireServer(unpack(args))
+
     end
 end
 
